@@ -1,0 +1,25 @@
+body{
+    font-family: Arial;
+    text-align: center;
+    background: #e8e8e8;
+}
+
+h1{
+    margin-top: 25px;
+}
+
+#stimulus{
+    font-size: 150px;
+    margin: 70px;
+    font-weight: bold;
+}
+
+button{
+    padding: 10px 20px;
+    margin: 12px;
+    font-size: 16px;
+}
+
+#stats{
+    margin-top: 25px;
+}

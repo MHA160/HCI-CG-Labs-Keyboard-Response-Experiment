@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Keyboard Response</title>
+    <style>
+        body{text-align:center;font-family:Arial;padding:20px}
+        #stimulus{font-size:120px;margin:40px;font-weight:bold}
+        button{margin:10px;padding:8px 16px}
+        .stats{display:flex;justify-content:center;gap:30px;margin-top:20px}
+    </style>
+</head>
+<body>
+<h1>Keyboard Response</h1>
+<div id="stimulus">?</div>
+<button onclick="start()">Start</button>
+<button onclick="reset()">Reset</button>
+<p>Press <b>A</b> = Letter | Press <b>L</b> = Number</p>
+<div class="stats"><span>Trials: <span id="t">0</span></span><span>Avg RT: <span id="a">0</span> ms</span></div>
+
+<script>
+let startTime, total=0, trials=0, correct="";
+function gen(){
+    if(Math.random()<0.5){
+        correct="letter";
+        return "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[Math.floor(Math.random()*26)];
+    }else{
+        correct="number";
+        return Math.floor(Math.random()*10).toString();
+    }
+}
+function start(){
+    document.getElementById("stimulus").innerText=gen();
+    startTime=Date.now();
+}
+function record(){
+    let rt=Date.now()-startTime;
+    total+=rt;
+    trials++;
+    document.getElementById("t").innerText=trials;
+    document.getElementById("a").innerText=(total/trials).toFixed(2);
+    start();
+}
+document.addEventListener("keydown",(e)=>{
+    if(e.key==="a"||e.key==="A"){if(correct==="letter")record();}
+    else if(e.key==="l"||e.key==="L"){if(correct==="number")record();}
+    else if(e.code==="Space")reset();
+});
+function reset(){
+    trials=0; total=0;
+    document.getElementById("t").innerText=0;
+    document.getElementById("a").innerText=0;
+    document.getElementById("stimulus").innerText="?";
+}
+</script>
+</body>
+</html>
